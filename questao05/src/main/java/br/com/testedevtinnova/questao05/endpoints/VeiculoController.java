@@ -39,6 +39,11 @@ public class VeiculoController {
 	@Autowired
 	private Mapper mapper;
 
+	/**
+	 * Rota de cadastro de veiculos
+	 * @param formVeiculo dados do veiculos
+	 * @return retorna um json com uma mensagem de sucesso
+	 */
 	@PostMapping
 	public ResponseEntity<Object> salvarVeiculo(@RequestBody SalvarVeiculoDTO formVeiculo) {
 		this.service.cadastrarVeiculo(mapper.toVeiculo(formVeiculo));
@@ -46,6 +51,12 @@ public class VeiculoController {
 		return ResponseUtil.generate(HttpStatus.OK, "Cadastro realizado com sucesso!", false);
 	}
 	
+	/**
+	 * Rota de atualizacao do veiculo
+	 * @param veiculo novos dados do veiculo
+	 * @param id id do veiculo a ser atualizado
+	 * @return retorna um json com uma mensagem de sucesso ou erro caso o id do veiculo nao exista
+	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> atualizaVeiculo(@RequestBody VeiculoEntity veiculo, @PathVariable Long id) {
 		try {
@@ -58,6 +69,11 @@ public class VeiculoController {
 		}
 	}
 	
+	/**
+	 * Rota para remover um veiculo do sistema.
+	 * @param id id do veiculo a ser removido
+	 * @return retorna um json contendo uma mensagem de sucesso ou erro caso o veiculo com o id nao exista no banco
+	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> apagaVeiculo(@PathVariable Long id) {
 		try {
@@ -70,16 +86,30 @@ public class VeiculoController {
 		}
 	}
 	
+	/**
+	 * Recupera todos veiculos em uma lista
+	 * @return um json array contendo todos os veiculos do sistema
+	 */
 	@GetMapping
 	public Iterable<VeiculoEntity> getAll() {
 		return this.service.retornaTodosVeiculos();
 	}
 	
+	/**
+	 * Rota responsavel por retornar um veiculo pelo seu id
+	 * @param id id do veiculo na pesquisa
+	 * @return retorna o veiculo com o id especificado
+	 */
 	@GetMapping("/{id}")
 	public VeiculoEntity getById(@PathVariable Long id) throws EntidadeNaoEncontradaException {
 		return this.service.find(id);
 	}
 	
+	/**
+	 * Rota responsavel pela pesquisa de alguns relatorios.
+	 * @param query parametro q passado na url para definir o resultado da pesquisa
+	 * @return retorna uma lista de veiculos dependendo do criterio de pesquisa do parametro query
+	 */
 	@GetMapping("/find")
 	public List<? extends ResultadoPesquisa> pesquisa(@RequestParam("q") String query) {
 		try {
@@ -92,6 +122,12 @@ public class VeiculoController {
 		return null;
 	}
 	
+	/**
+	 * Rota que permite o update parcial dos veiculos 
+	 * @param id id do veiculo
+	 * @param body dados parciais do veiculo para o update
+	 * @return retorna um json com mensagem indicando sucesso ou falha.
+	 */
 	@PatchMapping("/{id}")
 	public ResponseEntity<Object> patchVeiculo(@PathVariable Long id, @RequestBody Map<Object, Object> body) {
 		try {

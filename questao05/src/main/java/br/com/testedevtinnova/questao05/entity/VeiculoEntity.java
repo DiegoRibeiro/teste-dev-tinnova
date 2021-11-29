@@ -1,23 +1,19 @@
 package br.com.testedevtinnova.questao05.entity;
 
 import java.time.Instant;
-
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import br.com.testedevtinnova.questao05.interfaces.InterfaceGenerica;
 import br.com.testedevtinnova.questao05.polimorfismo.ResultadoPesquisa;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class VeiculoEntity extends ResultadoPesquisa implements InterfaceGenerica {
+public class VeiculoEntity extends ResultadoPesquisa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
