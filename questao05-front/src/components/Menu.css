@@ -1,0 +1,19 @@
+.Menu-background {
+	background-color: rgb(168, 165, 172);
+}
+
+.Menu-bar {
+	cursor: pointer;
+	display: inline-block;
+}
+
+.Menu-bar li {
+	color: #fff;
+	display: inline;
+	padding: 15px;;
+	white-space:nowrap;
+}
+
+.Menu-bar li:hover {
+	background-color: #282c34;
+}
